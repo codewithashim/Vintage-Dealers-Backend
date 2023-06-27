@@ -20,6 +20,36 @@ const getAllBrand = async (req, res) => {
   }
 };
 
+// Get All Brand With Paginetion
+
+const getAllBrandWithPaginetion = async (req, res) => {
+  try {
+    const page = parseInt(req.query.page) || 1;
+    const pageSize = parseInt(req.query.pageSize) || 10;
+    const skip = (page - 1) * pageSize;
+    const totalBrand = await BrandModal.countDocuments();
+    const totalPages = Math.ceil(totalBrand / pageSize);
+    const allBrand = await BrandModal.find().skip(skip).limit(pageSize).sort({ createdAt: 1 });
+
+    res.send({
+      status: 200,
+      success: true,
+      message: "Get All Brand",
+      data: allBrand,
+      page,
+      pageSize,
+      totalPages,
+      totalBrand,
+    });
+  } catch (err) {
+    res.send({
+      status: 404,
+      success: false,
+      message: err.message,
+    });
+  }
+};
+
 // get brand by id
 
 const getBrandById = async (req, res) => {
@@ -115,4 +145,5 @@ module.exports = {
   addBrand,
   getBrandById,
   getAllBrand,
+  getAllBrandWithPaginetion
 };
