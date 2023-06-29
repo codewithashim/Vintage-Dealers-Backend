@@ -18,6 +18,7 @@ const BrandSliderRouter = require("./Router/BrandSliderRouter");
 const BlogRouter = require("./Router/BlogRouter");
 const PhotoGelaryRouter = require("./Router/PhotoGelaryRouter");
 const TestDriveRouter = require("./Router/TestDriveRouter");  
+const PaymnetRouter = require("./Router/PayementRouter")
 
 ///////     End of Local Import      ////////
 
@@ -39,6 +40,7 @@ app.use("/api", BrandSliderRouter);
 app.use("/api", BlogRouter);
 app.use("/api", PhotoGelaryRouter);
 app.use("/api", TestDriveRouter);
+app.use("/api", PaymnetRouter);
 
 ///////     End of Middilwaire Use    ////////
 
@@ -46,7 +48,7 @@ app.use("/api", TestDriveRouter);
 //           DB Connection And Local         //
 /////////////////////////////////////////////*/
 
-app.get("/api/", (req, res) => {
+app.get("/api/v1", (req, res) => {
   res.send("Hey Wellcome to API Server");
 });
 
